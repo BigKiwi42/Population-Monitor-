@@ -1,129 +1,41 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+#code here is to explain pop growth and decline of rabbits wolves and other creatures and foiliage
 
-# C extensions
-*.so
+#the base formula is I = rN (K - N / K)
+#I = population at end of cycle.(yearly) this figure may be setup to be daily change but to do so will add other variables unaccounted for in this formula
+#r = birth rate increase with prosperity and decreased with lack of prosperity
+#N = base population is the starting population in an area this should be close to the carry capacity (K) 
+#K = carrying capacity this number can be extremely large and is difined by Area and availble food sources and home locations
+# prosperity is the accumaltion of anyting that increases quality of life for the subject
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+#a general term will be changed to something more appropriate later on
+#but will define food availability for rabbits. a base number =  %100 will mean every rabbit will have food %200 means the same as we wont force feed the rabbits
+#%50 will mean only half the rabbits will have food leading to a famine. and the %50 of rabbits will have to go through a formula to see survival rate. for later versions
+#defined through 0.0-1.0
+rabbit_food_abundance= 1.0
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+#area something sqr needs to be imput
+Area1= 60.0**2.0
 
-# Translations
-*.mo
-*.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+#this will substitute r in above formula
+rabbit_birth_rate= 0.8
 
-# Flask stuff:
-instance/
-.webassets-cache
+#this will substitute N in above formula
+rabbit_base_pop= 1600.0
 
-# Scrapy stuff:
-.scrapy
+#this will substitute K in above formula
+rabbit_carry_capacity= (Area1 * rabbit_food_abundance)/2.0
 
-# Sphinx documentation
-docs/_build/
+#this will need to become something based on wolves hunting on rabbits in future
+rabbit_deaths= rabbit_base_pop * 0.15
 
-# PyBuilder
-target/
+#this accounts for I in formula add at end Hunted rabbits or rabbits deaths.
+rabbit_population_actual= rabbit_birth_rate * rabbit_base_pop * (rabbit_carry_capacity - rabbit_base_pop / rabbit_carry_capacity) - rabbit_deaths
 
-# Jupyter Notebook
-.ipynb_checkpoints
+print(rabbit_population_actual)
+print(rabbit_food_abundance)
+print(rabbit_carry_capacity)
 
-# IPython
-profile_default/
-ipython_config.py
 
-# pyenv
-.python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
